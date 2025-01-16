@@ -1,11 +1,11 @@
 import pg, { QueryArrayConfig } from 'pg';
 
 const client = new pg.Client({
-    host: 'localhost',
-    user: 'root',
-    port: 5432,
-    password: '12345',
-    database: 'rankedvideos'
+    host: process.env.PG_HOST || 'localhost',
+    user: process.env.PG_USER || 'root',
+    port: (process.env.PG_PORT ? parseInt(process.env.PG_PORT) : 5432),
+    password: process.env.PG_PASSWORD,
+    database: process.env.PG_DATABASE || 'rankedvideos'
 });
 
 client.connect()

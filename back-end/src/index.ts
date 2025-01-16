@@ -1,6 +1,8 @@
 import express, { Express } from 'express'
-import routes from './routes';
 import 'express-async-errors';
+import 'dotenv/config'
+
+import routes from './routes';
 import { handleErrors } from './middlewares/handleErrors';
 
 const app: Express = express()

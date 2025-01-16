@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import UsersRepository from "../repositories/UsersRepository";
 import { hashPassword } from "../utils/hashPassword";
+import JsonWebTokenService from "../authentication/JsonWebTokenService";
+import { comparePasswordHash } from "../utils/comparePasswordHash";
 
 class UserController {
   async store(request: Request, response: Response) {
@@ -45,6 +47,45 @@ class UserController {
     }
 
     response.status(500).json({ error: 'Error on create User' });
+  }
+
+  async login(request: Request, response: Response) {
+    const {
+      name,
+      email,
+      password,
+    } = request.body;
+
+    if (!name) {
+      response.status(400).json({ error: 'name is required' });
+      return;
+    }
+
+    if (!email) {
+      response.status(400).json({ error: 'email is required' });
+      return;
+    }
+
+    if (!password) {
+      response.status(400).json({ error: 'password is required' });
+      return;
+    }
+
+    const userExists = await UsersRepository.findByEmail(email);
+
+    if(!userExists){
+      return response.status(400).json({ error: 'E-mail or password is incorrectly' });
+    }
+
+    const isPasswordValid = await comparePasswordHash(password, userExists.password);
+
+    if(userExists && !isPasswordValid){
+      return response.status(400).json({ error: 'E-mail or password is incorrectly' });
+    }
+
+    const jwtToken = JsonWebTokenService.generateToken(userExists.id);
+
+    response.status(200).json({ token: jwtToken });
   }
 }
 
