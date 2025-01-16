@@ -8,3 +8,13 @@ CREATE TABLE IF NOT EXISTS users (
   email VARCHAR UNIQUE NOT NULL,
   password VARCHAR NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS videos (
+  id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+  title VARCHAR NOT NULL,
+  votes INT,
+  date DATE DEFAULT CURRENT_DATE,
+  path VARCHAR,
+  uploaded_by UUID,
+  FOREIGN KEY(uploaded_by) REFERENCES users(id) ON DELETE SET NULL
+);
