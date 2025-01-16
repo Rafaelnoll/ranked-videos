@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import UsersRepository from "../repositories/UsersRepository";
+import { hashPassword } from "../utils/hashPassword";
 
 class UserController {
   async store(request: Request, response: Response) {
@@ -30,9 +31,11 @@ class UserController {
       return response.status(400).json({ error: 'E-mail already in use' });
     }
 
+    const hashOfPassword = await hashPassword(password);
+
     const userCreated = await UsersRepository.create({
       name,
-      password,
+      password: hashOfPassword,
       email
     });
 

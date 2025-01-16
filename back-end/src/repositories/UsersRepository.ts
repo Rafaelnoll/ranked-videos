@@ -25,7 +25,7 @@ class UsersRepository implements IRepository<IUser> {
     const [row] = await query(`
       INSERT INTO users(name, password, email)
       VALUES($1, $2, $3)
-      RETURNING *;
+      RETURNING id, name, email;
     `, [name, password, email]);
 
     return row;
