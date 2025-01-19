@@ -1,9 +1,10 @@
 import FormGroup from "../../components/FormGroup";
-import { Container, Form } from "./styles";
+import { Container, Form, RegisterLinkContainer, RegisterLinkText } from "./styles";
 import { ButtonContainer } from "../../components/FormGroup/styles";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Label from "../../components/Label";
+import { Link } from "react-router";
 
 export default function Login(){
   return (
@@ -22,6 +23,12 @@ export default function Login(){
         <ButtonContainer>
           <Button type="submit">Login</Button>
         </ButtonContainer>
+
+        <RegisterLinkContainer>
+          <RegisterLinkText>
+            Or <Link to='/register'>Register Account</Link>
+          </RegisterLinkText>
+        </RegisterLinkContainer>
       </Form>
     </Container>
   )
