@@ -6,7 +6,7 @@ import Button from "../../components/Button";
 import Label from "../../components/Label";
 import { Link } from "react-router";
 
-export default function Login(){
+export default function Register(){
   return (
     <Container>
        <Form>
@@ -20,13 +20,18 @@ export default function Login(){
           <Input placeholder="●●●●●●●●●●" type="password" />
         </FormGroup>
 
+        <FormGroup>
+          <Label>Confirm Password</Label>
+          <Input placeholder="●●●●●●●●●●" type="password" />
+        </FormGroup>
+
         <ButtonContainer>
-          <Button type="submit">Login</Button>
+          <Button type="submit">Register</Button>
         </ButtonContainer>
 
         <RegisterLinkContainer>
           <RegisterLinkText>
-            Or <Link to='/register'>Create a new account</Link>
+            Or <Link to='/login'>Log in to your account</Link>
           </RegisterLinkText>
         </RegisterLinkContainer>
       </Form>
