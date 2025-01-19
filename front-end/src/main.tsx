@@ -6,6 +6,7 @@ import theme from './assets/styles/themes/default';
 import GlobalStyles from './assets/styles/global';
 import Routes from './routes';
 import { Header } from './components/Header';
+import { ToastContainer } from 'react-toastify';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')!).render(
       <GlobalStyles />
       <Header />
       <Routes />
+      <ToastContainer />
     </ThemeProvider>
   </StrictMode>,
 )
